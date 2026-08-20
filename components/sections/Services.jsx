@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Reveal from '@/components/Reveal';
@@ -29,19 +32,60 @@ const services = [
   },
 ];
 
-function ServicePhone({ image, title }) {
+const serviceImages = services.map(({ image }) => image);
+
+function PhoneFrame({ children }) {
   return (
-    <div className="relative mx-auto h-[25rem] w-[14.5rem] rounded-[2rem] border-[5px] border-[#2b2b2b] bg-[#171717] p-1 shadow-[0_22px_35px_-18px_rgba(0,0,0,0.9)] transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-1 sm:h-[27rem] sm:w-[14.5rem]">
+    <div className="relative mx-auto h-100 w-58 rounded-4xl border-[5px] border-[#2b2b2b] bg-[#171717] p-1 shadow-[0_22px_35px_-18px_rgba(0,0,0,0.9)] transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-1 sm:h-108 sm:w-58">
       <div className="relative h-full w-full overflow-hidden rounded-3xl bg-white">
-        <Image src={image} alt={`${title} service`} fill sizes="232px" className="object-contain transition-transform duration-500 group-hover:scale-105" />
+        {children}
         <div className="absolute left-1/2 top-2 h-5 w-16 -translate-x-1/2 rounded-full bg-[#171717]" />
         <div className="absolute inset-x-0 bottom-0 h-14 bg-linear-to-t from-[#1c1c1b]/45 to-transparent" />
-        <span className="absolute bottom-4 left-1/2 max-w-[calc(100%-1rem)] -translate-x-1/2 rounded-full bg-[#1c1c1b]/80 px-3 py-1 text-center text-[10px] font-bold uppercase tracking-[0.12em] text-[#febf41] backdrop-blur-sm">
-          {title}
-        </span>
       </div>
       <div className="absolute bottom-2 left-1/2 h-1 w-12 -translate-x-1/2 rounded-full bg-white/70" />
     </div>
+  );
+}
+
+function ImageSliderPhone() {
+  const [activeImage, setActiveImage] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveImage((current) => (current + 1) % serviceImages.length);
+    }, 3000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return (
+    <PhoneFrame>
+      <Image
+        key={serviceImages[activeImage]}
+        src={serviceImages[activeImage]}
+        alt="HDL digital commerce services"
+        fill
+        sizes="232px"
+        className="object-contain transition-opacity duration-700"
+      />
+    </PhoneFrame>
+  );
+}
+
+function VideoPhone() {
+  return (
+    <PhoneFrame>
+      <video
+        className="h-full w-full object-cover"
+        src="/HDL_enhanced_fixed.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label="HDL digital commerce showcase"
+      />
+    </PhoneFrame>
   );
 }
 
@@ -59,19 +103,27 @@ export default function Services() {
           </div>
         </Reveal>
 
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map(({ number, title, text, image }, index) => (
-            <Reveal key={title} delay={index * 100}>
-              <article className="group text-center">
-                <ServicePhone image={image} title={title} />
-                <div className="mx-auto max-w-xs px-3 pt-7 sm:px-0">
-                  <div className="mb-3 flex items-start justify-center gap-3"><h3 className="text-xl font-semibold">{title}</h3><span className="text-sm text-white/40">{number}</span></div>
-                  <p className="leading-7 text-[#c6c5c5]">{text}</p>
-                  <ArrowUpRight className="mx-auto mt-5 text-[#febf41] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </div>
-              </article>
-            </Reveal>
-          ))}
+        <div className="mx-auto grid max-w-3xl gap-12 sm:grid-cols-2">
+          <Reveal>
+            <article className="group text-center">
+              <ImageSliderPhone />
+              <div className="mx-auto max-w-xs px-3 pt-7 sm:px-0">
+                <h3 className="mb-3 text-xl font-semibold">Digital commerce suite</h3>
+                <p className="leading-7 text-[#c6c5c5]">Shopify, Amazon, PIM, and mobile solutions working together.</p>
+                <ArrowUpRight className="mx-auto mt-5 text-[#febf41] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </div>
+            </article>
+          </Reveal>
+          <Reveal delay={120}>
+            <article className="group text-center">
+              <VideoPhone />
+              <div className="mx-auto max-w-xs px-3 pt-7 sm:px-0">
+                <h3 className="mb-3 text-xl font-semibold">HDL in action</h3>
+                <p className="leading-7 text-[#c6c5c5]">See the people and technology behind every transformation.</p>
+                <ArrowUpRight className="mx-auto mt-5 text-[#febf41] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </div>
+            </article>
+          </Reveal>
         </div>
       </div>
     </section>
