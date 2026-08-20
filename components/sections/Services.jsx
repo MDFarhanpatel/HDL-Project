@@ -11,8 +11,8 @@ const services = [
   },
   {
     number: '02',
-    title: 'Amazon SPN',
     text: 'Marketplace onboarding, catalog management, and growth systems for global selling.',
+    title: 'Amazon SPN',
     image: '/amazon-banner.jpg',
   },
   {
@@ -32,7 +32,7 @@ const services = [
 function ServicePhone({ image, title }) {
   return (
     <div className="relative mx-auto h-[25rem] w-[14.5rem] rounded-[2rem] border-[5px] border-[#2b2b2b] bg-[#171717] p-1 shadow-[0_22px_35px_-18px_rgba(0,0,0,0.9)] transition-transform duration-500 group-hover:-translate-y-2 group-hover:rotate-1 sm:h-[27rem] sm:w-[14.5rem]">
-      <div className="relative h-full w-full overflow-hidden rounded-[1.55rem] bg-white">
+      <div className="relative h-full w-full overflow-hidden rounded-3xl bg-white">
         <Image src={image} alt={`${title} service`} fill sizes="232px" className="object-contain transition-transform duration-500 group-hover:scale-105" />
         <div className="absolute left-1/2 top-2 h-5 w-16 -translate-x-1/2 rounded-full bg-[#171717]" />
         <div className="absolute inset-x-0 bottom-0 h-14 bg-linear-to-t from-[#1c1c1b]/45 to-transparent" />

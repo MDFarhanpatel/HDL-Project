@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Play } from 'lucide-react';
 
 const heroSlides = [
   {
@@ -33,22 +33,15 @@ const heroSlides = [
 
 export default function Hero() {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const slide = heroSlides[activeSlide];
 
   useEffect(() => {
-    if (isPaused) return undefined;
-
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % heroSlides.length);
-    }, 5000);
+    }, 3000);
 
     return () => window.clearInterval(timer);
-  }, [isPaused]);
-
-  const showSlide = (index) => {
-    setActiveSlide((index + heroSlides.length) % heroSlides.length);
-  };
+  }, []);
 
   return (
     <section id="top" className="relative min-h-screen overflow-hidden bg-linear-to-b from-[#f7f5ef] via-[#fbfaf6] to-[#eeeae0] pt-20">
@@ -115,70 +108,26 @@ export default function Hero() {
             <div className="w-full space-y-4">
               <div
                 id="hero-slider"
-                className="group relative"
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
+                className="relative overflow-hidden bg-[#dce8ed] shadow-xl shadow-[#1c1c1b]/10"
+                aria-live="polite"
               >
-                <div className="absolute -inset-3 rounded-[2rem] bg-linear-to-br from-[#febf41]/35 via-transparent to-[#575757]/20 blur-2xl transition-opacity duration-500 group-hover:opacity-90" />
-
-                <div className="relative overflow-hidden rounded-[2rem] border border-[#575757]/35 bg-[#1c1c1b] p-2 shadow-2xl shadow-[#1c1c1b]/20">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-[#f7f5ef]">
-                    <Image
-                      key={slide.image}
-                      src={slide.image}
-                      alt={slide.title}
-                      fill
-                      priority={activeSlide === 0}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-contain p-5 transition-opacity duration-500 sm:p-8"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#1c1c1b]/75 via-transparent to-transparent" />
-                    <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 text-white sm:inset-x-8 sm:bottom-8">
-                      <div className="max-w-xs">
-                        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#febf41]">{slide.eyebrow}</p>
-                        <p className="text-lg font-semibold leading-tight sm:text-2xl">{slide.title}</p>
-                      </div>
-                      <span className="shrink-0 rounded-full border border-white/25 bg-[#1c1c1b]/45 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] backdrop-blur-sm">{slide.tag}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between gap-4 px-2 pb-1 pt-3 sm:px-3">
-                    <div className="flex items-center gap-1.5" aria-label="Choose a slide">
-                      {heroSlides.map((item, index) => (
-                        <button
-                          key={item.tag}
-                          type="button"
-                          onClick={() => showSlide(index)}
-                          aria-label={`Show ${item.tag} slide`}
-                          aria-current={activeSlide === index ? 'true' : undefined}
-                          className={`h-1.5 rounded-full transition-all duration-300 ${activeSlide === index ? 'w-8 bg-[#febf41]' : 'w-1.5 bg-white/35 hover:bg-white/70'}`}
-                        />
-                      ))}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <button type="button" onClick={() => showSlide(activeSlide - 1)} aria-label="Previous slide" className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10">
-                        <ArrowLeft size={17} />
-                      </button>
-                      <button type="button" onClick={() => showSlide(activeSlide + 1)} aria-label="Next slide" className="flex h-10 w-10 items-center justify-center rounded-full bg-[#febf41] text-[#1c1c1b] transition-transform hover:scale-105">
-                        <ArrowRight size={17} />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom stats bar */}
-                <div className="mt-4 grid grid-cols-3 gap-3">
-                  <div className="bg-gray-50/50 border border-gray-200/50 rounded-xl p-3 backdrop-blur-sm">
-                    <p className="text-xs text-gray-600">Real-time Analytics</p>
-                    <p className="text-lg font-bold text-gray-900">99.9%</p>
-                  </div>
-                  <div className="bg-gray-50/50 border border-gray-200/50 rounded-xl p-3 backdrop-blur-sm">
-                    <p className="text-xs text-gray-600">Response Time</p>
-                    <p className="text-lg font-bold text-gray-900">{"<"}50ms</p>
-                  </div>
-                  <div className="bg-gray-50/50 border border-gray-200/50 rounded-xl p-3 backdrop-blur-sm">
-                    <p className="text-xs text-gray-600">Uptime SLA</p>
-                    <p className="text-lg font-bold text-gray-900">99.99%</p>
+                <div className="relative aspect-video">
+                  <Image
+                    key={slide.image}
+                    src={slide.image}
+                    alt={slide.title}
+                    fill
+                    priority={activeSlide === 0}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover transition-opacity duration-700"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#1c1c1b]/25 via-transparent to-[#1c1c1b]/65" />
+                  <p className="absolute left-4 top-4 text-sm font-medium text-white sm:left-6 sm:top-5 sm:text-base">
+                    {activeSlide + 1} / {heroSlides.length}
+                  </p>
+                  <div className="absolute inset-x-4 bottom-5 text-center text-white sm:bottom-7">
+                    <p className="text-xl font-semibold tracking-tight sm:text-2xl">{slide.tag}</p>
+                    <p className="mx-auto mt-1 max-w-md text-xs text-white/85 sm:text-sm">{slide.title}</p>
                   </div>
                 </div>
               </div>
