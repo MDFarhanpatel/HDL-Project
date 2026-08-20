@@ -82,6 +82,7 @@ function VideoPhone() {
         muted
         loop
         playsInline
+        playbackRate={2}
         preload="metadata"
         aria-label="HDL digital commerce showcase"
       />
