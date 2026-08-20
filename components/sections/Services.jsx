@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Reveal from '@/components/Reveal';
@@ -73,16 +73,24 @@ function ImageSliderPhone() {
 }
 
 function VideoPhone() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 2;
+    }
+  }, []);
+
   return (
     <PhoneFrame>
       <video
+        ref={videoRef}
         className="h-full w-full object-cover"
         src="/HDL_enhanced_fixed.mp4"
         autoPlay
         muted
         loop
         playsInline
-        playbackRate={2}
         preload="metadata"
         aria-label="HDL digital commerce showcase"
       />
