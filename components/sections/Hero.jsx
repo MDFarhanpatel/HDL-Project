@@ -1,8 +1,55 @@
 'use client';
 
-import { Play, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { ArrowLeft, ArrowRight, Play } from 'lucide-react';
+
+const heroSlides = [
+  {
+    image: '/shopify-banner.jpg',
+    eyebrow: 'Commerce systems',
+    title: 'Storefronts that move at the speed of your brand.',
+    tag: 'Shopify Plus',
+  },
+  {
+    image: '/amazon-banner.jpg',
+    eyebrow: 'Marketplace growth',
+    title: 'Turn global reach into repeatable revenue.',
+    tag: 'Amazon SPN',
+  },
+  {
+    image: '/PIM.jpg',
+    eyebrow: 'Product intelligence',
+    title: 'One source of truth for every product moment.',
+    tag: 'AI-powered PIM',
+  },
+  {
+    image: '/appdev.jpg',
+    eyebrow: 'Digital experiences',
+    title: 'Useful mobile experiences people come back to.',
+    tag: 'Mobile applications',
+  },
+];
 
 export default function Hero() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const slide = heroSlides[activeSlide];
+
+  useEffect(() => {
+    if (isPaused) return undefined;
+
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 5000);
+
+    return () => window.clearInterval(timer);
+  }, [isPaused]);
+
+  const showSlide = (index) => {
+    setActiveSlide((index + heroSlides.length) % heroSlides.length);
+  };
+
   return (
     <section id="top" className="relative min-h-screen overflow-hidden bg-linear-to-b from-[#f7f5ef] via-[#fbfaf6] to-[#eeeae0] pt-20">
       {/* Animated background elements */}
@@ -40,9 +87,9 @@ export default function Hero() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
               
-              <a href="#hero-video" className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#c6c5c5] px-8 py-4 font-semibold text-[#575757] transition-all duration-300 hover:border-[#a2a1a1] hover:bg-white/60 active:scale-95">
+              <a href="#hero-slider" className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#c6c5c5] px-8 py-4 font-semibold text-[#575757] transition-all duration-300 hover:border-[#a2a1a1] hover:bg-white/60 active:scale-95">
                 <Play className="w-5 h-5" />
-                Watch Demo
+                Explore our work
               </a>
             </div>
 
@@ -63,30 +110,59 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Video Screen */}
+          {/* Right Image Slider */}
           <div className="relative z-10 h-full min-h-96 lg:min-h-screen flex items-center">
             <div className="w-full space-y-4">
-              {/* Video Screen Frame */}
-              <div className="relative group">
-                {/* Outer glow effect */}
-                <div className="absolute -inset-2 rounded-3xl bg-linear-to-r from-[#febf41]/35 via-[#6e6e6f]/25 to-[#febf41]/35 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
-                
-                {/* Main video container */}
-                <div className="relative overflow-hidden rounded-3xl border border-[#575757]/40 bg-[#1c1c1b] shadow-2xl">
-                  <video
-                    id="hero-video"
-                    className="aspect-video w-full object-cover"
-                    src="/HDL_enhanced_fixed.mp4"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    aria-label="HydrixLabs digital commerce showcase"
-                  />
-                  <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b from-[#1c1c1b]/35 to-transparent" />
-                  <div className="pointer-events-none absolute left-5 top-5 rounded-full border border-white/20 bg-[#1c1c1b]/55 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-                    HydrixLabs showcase
+              <div
+                id="hero-slider"
+                className="group relative"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+              >
+                <div className="absolute -inset-3 rounded-[2rem] bg-linear-to-br from-[#febf41]/35 via-transparent to-[#575757]/20 blur-2xl transition-opacity duration-500 group-hover:opacity-90" />
+
+                <div className="relative overflow-hidden rounded-[2rem] border border-[#575757]/35 bg-[#1c1c1b] p-2 shadow-2xl shadow-[#1c1c1b]/20">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-[#f7f5ef]">
+                    <Image
+                      key={slide.image}
+                      src={slide.image}
+                      alt={slide.title}
+                      fill
+                      priority={activeSlide === 0}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-contain p-5 transition-opacity duration-500 sm:p-8"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#1c1c1b]/75 via-transparent to-transparent" />
+                    <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 text-white sm:inset-x-8 sm:bottom-8">
+                      <div className="max-w-xs">
+                        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#febf41]">{slide.eyebrow}</p>
+                        <p className="text-lg font-semibold leading-tight sm:text-2xl">{slide.title}</p>
+                      </div>
+                      <span className="shrink-0 rounded-full border border-white/25 bg-[#1c1c1b]/45 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] backdrop-blur-sm">{slide.tag}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-4 px-2 pb-1 pt-3 sm:px-3">
+                    <div className="flex items-center gap-1.5" aria-label="Choose a slide">
+                      {heroSlides.map((item, index) => (
+                        <button
+                          key={item.tag}
+                          type="button"
+                          onClick={() => showSlide(index)}
+                          aria-label={`Show ${item.tag} slide`}
+                          aria-current={activeSlide === index ? 'true' : undefined}
+                          className={`h-1.5 rounded-full transition-all duration-300 ${activeSlide === index ? 'w-8 bg-[#febf41]' : 'w-1.5 bg-white/35 hover:bg-white/70'}`}
+                        />
+                      ))}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <button type="button" onClick={() => showSlide(activeSlide - 1)} aria-label="Previous slide" className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10">
+                        <ArrowLeft size={17} />
+                      </button>
+                      <button type="button" onClick={() => showSlide(activeSlide + 1)} aria-label="Next slide" className="flex h-10 w-10 items-center justify-center rounded-full bg-[#febf41] text-[#1c1c1b] transition-transform hover:scale-105">
+                        <ArrowRight size={17} />
+                      </button>
+                    </div>
                   </div>
                 </div>
 
