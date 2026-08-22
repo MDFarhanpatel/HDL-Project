@@ -1,48 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { ArrowRight, Play } from 'lucide-react';
-
-const heroSlides = [
-  {
-    image: '/shopify-banner.jpg',
-    eyebrow: 'Commerce systems',
-    title: 'Storefronts that move at the speed of your brand.',
-    tag: 'Shopify Plus',
-  },
-  {
-    image: '/amazon-banner.jpg',
-    eyebrow: 'Marketplace growth',
-    title: 'Turn global reach into repeatable revenue.',
-    tag: 'Amazon SPN',
-  },
-  {
-    image: '/PIM.jpg',
-    eyebrow: 'Product intelligence',
-    title: 'One source of truth for every product moment.',
-    tag: 'AI-powered PIM',
-  },
-  {
-    image: '/appdev.jpg',
-    eyebrow: 'Digital experiences',
-    title: 'Useful mobile experiences people come back to.',
-    tag: 'Mobile applications',
-  },
-];
+import { Play, ArrowRight } from 'lucide-react';
 
 export default function Hero() {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const slide = heroSlides[activeSlide];
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveSlide((current) => (current + 1) % heroSlides.length);
-    }, 3000);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
   return (
     <section id="top" className="relative min-h-screen overflow-hidden bg-linear-to-b from-[#f7f5ef] via-[#fbfaf6] to-[#eeeae0] pt-20">
       {/* Animated background elements */}
@@ -80,9 +40,9 @@ export default function Hero() {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
               
-              <a href="#hero-slider" className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#c6c5c5] px-8 py-4 font-semibold text-[#575757] transition-all duration-300 hover:border-[#a2a1a1] hover:bg-white/60 active:scale-95">
+              <a href="#hero-video" className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#c6c5c5] px-8 py-4 font-semibold text-[#575757] transition-all duration-300 hover:border-[#a2a1a1] hover:bg-white/60 active:scale-95">
                 <Play className="w-5 h-5" />
-                Explore our work
+                Watch Demo
               </a>
             </div>
 
@@ -103,31 +63,46 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Image Slider */}
+          {/* Right Video Screen */}
           <div className="relative z-10 h-full min-h-96 lg:min-h-screen flex items-center">
             <div className="w-full space-y-4">
-              <div
-                id="hero-slider"
-                className="relative overflow-hidden bg-[#dce8ed] shadow-xl shadow-[#1c1c1b]/10"
-                aria-live="polite"
-              >
-                <div className="relative aspect-video">
-                  <Image
-                    key={slide.image}
-                    src={slide.image}
-                    alt={slide.title}
-                    fill
-                    priority={activeSlide === 0}
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover transition-opacity duration-700"
+              {/* Video Screen Frame */}
+              <div className="relative group">
+                {/* Outer glow effect */}
+                <div className="absolute -inset-2 rounded-3xl bg-linear-to-r from-[#febf41]/35 via-[#6e6e6f]/25 to-[#febf41]/35 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+                
+                {/* Main video container */}
+                <div className="relative overflow-hidden rounded-3xl border border-[#575757]/40 bg-[#1c1c1b] shadow-2xl">
+                  <video
+                    id="hero-video"
+                    className="aspect-video w-full object-cover"
+                    src="/HDL_enhanced_fixed.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label="HydrixLabs digital commerce showcase"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-[#1c1c1b]/25 via-transparent to-[#1c1c1b]/65" />
-                  <p className="absolute left-4 top-4 text-sm font-medium text-white sm:left-6 sm:top-5 sm:text-base">
-                    {activeSlide + 1} / {heroSlides.length}
-                  </p>
-                  <div className="absolute inset-x-4 bottom-5 text-center text-white sm:bottom-7">
-                    <p className="text-xl font-semibold tracking-tight sm:text-2xl">{slide.tag}</p>
-                    <p className="mx-auto mt-1 max-w-md text-xs text-white/85 sm:text-sm">{slide.title}</p>
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-linear-to-b from-[#1c1c1b]/35 to-transparent" />
+                  <div className="pointer-events-none absolute left-5 top-5 rounded-full border border-white/20 bg-[#1c1c1b]/55 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                    HydrixLabs showcase
+                  </div>
+                </div>
+
+                {/* Bottom stats bar */}
+                <div className="mt-4 grid grid-cols-3 gap-3">
+                  <div className="bg-gray-50/50 border border-gray-200/50 rounded-xl p-3 backdrop-blur-sm">
+                    <p className="text-xs text-gray-600">Real-time Analytics</p>
+                    <p className="text-lg font-bold text-gray-900">99.9%</p>
+                  </div>
+                  <div className="bg-gray-50/50 border border-gray-200/50 rounded-xl p-3 backdrop-blur-sm">
+                    <p className="text-xs text-gray-600">Response Time</p>
+                    <p className="text-lg font-bold text-gray-900">{"<"}50ms</p>
+                  </div>
+                  <div className="bg-gray-50/50 border border-gray-200/50 rounded-xl p-3 backdrop-blur-sm">
+                    <p className="text-xs text-gray-600">Uptime SLA</p>
+                    <p className="text-lg font-bold text-gray-900">99.99%</p>
                   </div>
                 </div>
               </div>
