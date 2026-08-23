@@ -60,8 +60,8 @@ export default function Navbar() {
           </div>
 
           {/* Contact Button - Desktop */}
-          <a href="#contact" className="hidden lg:flex items-center rounded-full bg-[#febf41] px-5 py-2.5 text-sm font-semibold text-[#1c1c1b] transition-all duration-300 hover:bg-[#eab02e] hover:shadow-lg hover:shadow-[#febf41]/30 hover:-translate-y-0.5">
-            Contact
+          <a href="#contact" className={`hidden lg:flex items-center rounded-full bg-[#febf41] font-semibold text-[#1c1c1b] transition-all duration-300 hover:bg-[#eab02e] hover:shadow-lg hover:shadow-[#febf41]/30 ${isScrolled ? 'px-4 py-1.5 text-xs' : 'px-5 py-2.5 text-sm'}`}>
+            Let's Talk
           </a>
 
           {/* Mobile Menu Button */}
@@ -95,7 +95,7 @@ export default function Navbar() {
             {/* Mobile Contact Button */}
             <div className="border-t border-[#eadfb9]/70 pt-4">
               <a href="#contact" onClick={() => setIsOpen(false)} className="block min-h-11 rounded-full bg-[#febf41] px-4 py-3 text-center text-sm font-semibold text-[#1c1c1b] transition-all duration-300 hover:bg-[#eab02e]">
-                Contact
+                Let's Talk
               </a>
             </div>
           </div>

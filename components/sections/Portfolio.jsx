@@ -30,7 +30,7 @@ const projects = [
 	{
 		title: 'Digital Transformation',
 		category: 'E-Commerce',
-		image: '/lioqi.webp',
+		image: '/images (1).jpg',
 	},
 ];
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { Play, ArrowRight } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const sliderImages = [
@@ -14,10 +14,6 @@ const sliderImages = [
 
 export default function Hero() {
 	const [currentImage, setCurrentImage] = useState(0);
-	const [mousePos, setMousePos] = useState({ x: -200, y: -200 });
-	const [smoothPos, setSmoothPos] = useState({ x: -200, y: -200 });
-	const sectionRef = useRef(null);
-	const animationRef = useRef(null);
 
 	useEffect(() => {
 		const timer = setInterval(() => {
@@ -26,70 +22,14 @@ export default function Hero() {
 		return () => clearInterval(timer);
 	}, []);
 
-	useEffect(() => {
-		const handleMouseMove = (e) => {
-			if (sectionRef.current) {
-				const rect = sectionRef.current.getBoundingClientRect();
-				setMousePos({
-					x: e.clientX - rect.left,
-					y: e.clientY - rect.top,
-				});
-			}
-		};
-
-		const section = sectionRef.current;
-		if (section) {
-			section.addEventListener('mousemove', handleMouseMove);
-			return () => section.removeEventListener('mousemove', handleMouseMove);
-		}
-	}, []);
-
-	useEffect(() => {
-		const animate = () => {
-			setSmoothPos((prev) => ({
-				x: prev.x + (mousePos.x - prev.x) * 0.15,
-				y: prev.y + (mousePos.y - prev.y) * 0.15,
-			}));
-			animationRef.current = requestAnimationFrame(animate);
-		};
-		animationRef.current = requestAnimationFrame(animate);
-		return () => {
-			if (animationRef.current) {
-				cancelAnimationFrame(animationRef.current);
-			}
-		};
-	}, [mousePos]);
-
 	return (
-		<section ref={sectionRef} id="top" className="relative min-h-screen overflow-hidden bg-[#f7f5ef] pt-20">
+		<section id="top" className="relative min-h-screen overflow-hidden bg-[#f7f5ef] pt-20">
 			{/* Grid lines background */}
-			<div className="absolute inset-0 bg-[linear-gradient(rgba(213,169,0,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(213,169,0,0.12)_1px,transparent_1px)] bg-size-[50px_50px]" />
+			<div className="absolute inset-0 bg-[linear-gradient(rgba(213,169,0,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(213,169,0,0.1)_1px,transparent_1px)] bg-size-[50px_50px]" />
 
 			{/* Floating gradient orbs */}
-			<div className="absolute left-10 top-10 h-80 w-80 rounded-full bg-[#febf41]/30 blur-3xl opacity-60 animate-pulse" />
-			<div className="absolute bottom-20 right-10 h-72 w-72 rounded-full bg-[#d5a900]/25 blur-3xl opacity-50 animate-pulse" />
-
-			{/* Mouse-following spotlight - larger and more visible */}
-			<div
-				className="pointer-events-none absolute rounded-full will-change-transform"
-				style={{
-					width: '400px',
-					height: '400px',
-					transform: `translate3d(${smoothPos.x - 200}px, ${smoothPos.y - 200}px, 0)`,
-					background: 'radial-gradient(circle, rgba(255,191,65,0.5) 0%, rgba(255,191,65,0.25) 30%, rgba(213,169,0,0.1) 50%, transparent 70%)',
-				}}
-			/>
-
-			{/* Secondary soft glow - more visible */}
-			<div
-				className="pointer-events-none absolute rounded-full blur-2xl will-change-transform"
-				style={{
-					width: '280px',
-					height: '280px',
-					transform: `translate3d(${smoothPos.x - 140}px, ${smoothPos.y - 140}px, 0)`,
-					background: 'radial-gradient(circle, rgba(255,191,65,0.4) 0%, rgba(213,169,0,0.15) 50%, transparent 70%)',
-				}}
-			/>
+			<div className="absolute left-10 top-10 h-80 w-80 rounded-full bg-[#febf41]/20 blur-3xl opacity-40 animate-pulse" />
+			<div className="absolute bottom-20 right-10 h-72 w-72 rounded-full bg-[#d5a900]/15 blur-3xl opacity-30 animate-pulse" />
 
 			<div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
