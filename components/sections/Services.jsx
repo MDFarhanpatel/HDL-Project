@@ -49,13 +49,21 @@ function PhoneFrame({ children }) {
 
 function ImageSliderPhone() {
 	const [activeImage, setActiveImage] = useState(0);
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () => setIsMobile(window.innerWidth < 640);
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
 
 	useEffect(() => {
 		const timer = setInterval(() => {
 			setActiveImage((current) => (current + 1) % serviceImages.length);
-		}, 3000);
+		}, isMobile ? 1000 : 3000);
 		return () => clearInterval(timer);
-	}, []);
+	}, [isMobile]);
 
 	return (
 		<PhoneFrame>
@@ -72,12 +80,20 @@ function ImageSliderPhone() {
 
 function VideoPhone() {
 	const videoRef = useRef(null);
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () => setIsMobile(window.innerWidth < 640);
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
 
 	useEffect(() => {
 		if (videoRef.current) {
-			videoRef.current.playbackRate = 1.5;
+			videoRef.current.playbackRate = isMobile ? 3 : 1.5;
 		}
-	}, []);
+	}, [isMobile]);
 
 	return (
 		<PhoneFrame>
