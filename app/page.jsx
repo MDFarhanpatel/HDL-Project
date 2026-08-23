@@ -3,6 +3,7 @@ import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
 import Regions from "@/components/sections/Regions";
 import Ecosystem from "@/components/sections/Ecosystem";
+import Industries from "@/components/sections/Industries";
 import About from "@/components/sections/About";
 import WhyChoose from "@/components/sections/WhyChoose";
 import CTA from "@/components/sections/CTA";
@@ -17,6 +18,7 @@ export default function Home() {
       <Services />
       <Regions />
       <Ecosystem />
+      <Industries />
       <About />
       <WhyChoose />
       <CTA />

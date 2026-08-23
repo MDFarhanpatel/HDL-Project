@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-
-import { Menu, X, Camera, Send } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,9 +18,9 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const navLinks = [
-     { href: '#about', label: 'About' },
     { href: '#services', label: 'Services' },
     { href: '#portfolio', label: 'Portfolio' },
+    { href: '#about', label: 'About' },
     { href: '#contact', label: 'Contact' },
   ];
 
@@ -59,15 +58,10 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Social Icons - Desktop */}
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex min-h-11 min-w-11 items-center justify-center p-2 text-[#575757] transition-colors duration-300 hover:text-[#1c1c1b]">
-              <Camera className="w-5 h-5" />
-            </a>
-            <a href="#contact" className="flex min-h-11 min-w-11 items-center justify-center p-2 text-[#575757] transition-colors duration-300 hover:text-[#1c1c1b]">
-              <Send className="w-5 h-5" />
-            </a>
-          </div>
+          {/* Contact Button - Desktop */}
+          <a href="#contact" className="hidden lg:flex items-center rounded-full bg-[#febf41] px-5 py-2.5 text-sm font-semibold text-[#1c1c1b] transition-all duration-300 hover:bg-[#eab02e] hover:shadow-lg hover:shadow-[#febf41]/30 hover:-translate-y-0.5">
+            Contact
+          </a>
 
           {/* Mobile Menu Button */}
           <button
@@ -97,13 +91,10 @@ export default function Navbar() {
               </a>
             ))}
             
-            {/* Mobile Social Icons */}
-            <div className="flex items-center gap-4 border-t border-[#eadfb9]/70 pt-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex min-h-11 min-w-11 items-center justify-center p-2 text-[#575757] transition-colors duration-300 hover:text-[#1c1c1b]">
-                <Camera className="w-5 h-5" />
-              </a>
-              <a href="#contact" className="flex min-h-11 min-w-11 items-center justify-center p-2 text-[#575757] transition-colors duration-300 hover:text-[#1c1c1b]">
-                <Send className="w-5 h-5" />
+            {/* Mobile Contact Button */}
+            <div className="border-t border-[#eadfb9]/70 pt-4">
+              <a href="#contact" onClick={() => setIsOpen(false)} className="block min-h-11 rounded-full bg-[#febf41] px-4 py-3 text-center text-sm font-semibold text-[#1c1c1b] transition-all duration-300 hover:bg-[#eab02e]">
+                Contact
               </a>
             </div>
           </div>

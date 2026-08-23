@@ -1,4 +1,4 @@
-import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
 import Reveal from '@/components/Reveal';
 
 export default function CTA() {
@@ -25,10 +25,10 @@ export default function CTA() {
 						<input aria-label="Phone number" name="phone" placeholder="Phone number" className="h-14 w-full border border-[#a2a1a1] bg-white px-4 text-[#1c1c1b] outline-none transition-colors placeholder:text-[#6e6e6f] focus:border-[#febf41]" />
 						<textarea aria-label="Project details" name="message" required placeholder="Tell us about your project..." className="min-h-36 w-full resize-y border border-[#a2a1a1] bg-white px-4 py-4 text-[#1c1c1b] outline-none transition-colors placeholder:text-[#6e6e6f] focus:border-[#febf41]" />
 						<button type="submit" className="inline-flex min-h-14 w-full items-center justify-center gap-3 bg-[#febf41] px-6 font-semibold text-[#1c1c1b] transition-colors hover:bg-[#eab02e]">Request consultation <ArrowUpRight size={18} /></button>
-						<a href="https://wa.me/918309933090?text=Hi%20HydrixLabs%2C%20I%27d%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#575757] hover:text-[#1c1c1b]"><MessageCircle size={17} /> Or message us on WhatsApp</a>
 					</form>
 				</Reveal>
 			</div>
 		</section>
 	);
 }
+
