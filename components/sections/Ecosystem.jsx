@@ -11,7 +11,7 @@ const ecosystem = [
 
 export default function Ecosystem() {
   return (
-    <section id="community" className="bg-[#f7f5ef] px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+    <section id="community" className="bg-[#f7f5ef] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div className="text-center"><h2 className="text-4xl font-medium tracking-tight text-[#1c1c1b] sm:text-5xl">HDL Digital Commerce Ecosystem</h2><div className="mx-auto mt-6 h-1 w-20 bg-[#d5a900]" /><p className="mx-auto mt-5 max-w-2xl text-lg text-[#575757]">One platform. One partner. Complete digital commerce transformation.</p></div>

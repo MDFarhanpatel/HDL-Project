@@ -3,7 +3,7 @@ import Reveal from '@/components/Reveal';
 
 export default function About() {
 	return (
-		<section className="bg-[#f7f5ef] px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+		<section className="bg-[#f7f5ef] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
 			<div className="mx-auto max-w-6xl">
 				<Reveal><div className="text-center"><p className="mb-5 text-xs font-bold uppercase tracking-[0.3em] text-[#d5a900]">Message from co-founder</p><h2 className="text-4xl font-medium tracking-tight text-[#1c1c1b] sm:text-5xl">Building Technology. Building People.</h2></div></Reveal>
 				<div className="mx-auto mt-16 grid max-w-5xl gap-5 lg:grid-cols-[1.15fr_0.85fr]">

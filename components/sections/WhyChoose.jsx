@@ -9,7 +9,7 @@ const reasons = [
 
 export default function WhyChoose() {
   return (
-    <section id="about" className="bg-[#f7f5ef] px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+    <section id="about" className="bg-[#f7f5ef] px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <Reveal><div><h2 className="text-4xl font-medium tracking-tight text-[#1c1c1b] sm:text-5xl lg:text-6xl">Why Businesses Choose HDL</h2><p className="mt-8 max-w-xl text-lg leading-9 text-[#575757]">We take the stress away. From Shopify stores and Amazon onboarding to mobile apps and AI-powered PIM, HDL becomes your digital transformation partner.</p></div></Reveal>
         <div className="grid gap-5 sm:grid-cols-2">
