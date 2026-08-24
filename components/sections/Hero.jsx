@@ -119,6 +119,7 @@ export default function Hero() {
 											fill
 											sizes="(max-width: 1024px) 100vw, 50vw"
 											priority={index === 0}
+											loading="eager"
 											className="object-cover transition-opacity duration-700"
 											style={{ opacity: currentImage === index ? 1 : 0 }}
 										/>

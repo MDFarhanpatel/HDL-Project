@@ -50,7 +50,7 @@ export default function Portfolio() {
 					{projects.map((project, index) => (
 						<Reveal key={project.title} delay={index * 100}>
 							<article className="group relative overflow-hidden rounded-2xl bg-[#1c1c1b] shadow-xl transition-transform duration-300 hover:-translate-y-2">
-								<div className="relative aspect-[4/3] overflow-hidden">
+								<div className="relative aspect-4/3 overflow-hidden">
 									<Image
 										src={project.image}
 										alt={project.title}
