@@ -99,8 +99,7 @@ function VideoPhone() {
 		<PhoneFrame>
 			<video
 				ref={videoRef}
-				data-lenis-prevent
-				className="h-full w-full object-cover will-change-transform"
+				className="h-full w-full object-cover"
 				src="/HDL_enhanced_fixed.mp4"
 				autoPlay
 				muted
